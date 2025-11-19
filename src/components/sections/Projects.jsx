@@ -7,13 +7,13 @@ const projectsData = [ // Renamed to avoid conflict
   {
     id: "01",
     title: "ASME EFX Rover",
-    status: "Manufacturing",
-    category: "Robotics / Manufacturing",
-    desc: "Competition-ready rover chassis. Optimized suspension geometry for rough terrain using SolidWorks Simulation.",
-    tech: ["SolidWorks", "FEA", "Aluminum 6061", "3D Printing"],
+    status: "Designing",
+    category: "Robotics / Additive Manufacturing",
+    desc: "Competition-ready 3d printed all terrain rover. Optimized suspension geometry for rough terrain using SolidWorks Simulation.",
+    tech: ["SolidWorks", "FEA", "3D Printing", "Robotics", "Mechanical Design"],
     githubLink: "https://github.com/yourusername/rover-project", // Link to your GitHub repo
     fullDesc: {
-      overview: "Designed and fabricated a robust robotic rover for the ASME E-Fest Student Design Competition. Focused on modularity, ease of assembly, and off-road mobility to navigate diverse terrains and complete mission objectives.",
+      overview: "Designed and fabricated a robust robotic rover for the ASME IAM3d Competition. Focused on modularity, ease of assembly, and off-road mobility to navigate diverse terrains and complete mission objectives.",
       challenge: "The primary challenge was to balance lightweight design with structural integrity to carry payloads and withstand harsh competition environments. Iterative design was crucial to optimize the suspension system for maximum ground contact and stability.",
       approachPoints: [
         "Conceptualized multiple chassis architectures in SolidWorks, evaluating trade-offs between cost, weight, and manufacturability.",

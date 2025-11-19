@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { motion } from 'framer-motion';
-import ProjectModal from '../ui/ProjectModal'; // Import the new modal component
+import ProjectModal from '../ui/ProjectModal';
+ // Import the new modal component
 
 const projectsData = [ // Renamed to avoid conflict
   {
@@ -65,38 +66,49 @@ const projectsData = [ // Renamed to avoid conflict
   },
 ];
 
-const SpotlightCard = ({ project, onClick }) => { // Added onClick prop
+const SpotlightCard = ({ project, onClick }) => {
   const divRef = useRef(null);
+  const [isFocused, setIsFocused] = useState(false);
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [opacity, setOpacity] = useState(0);
 
   const handleMouseMove = (e) => {
     if (!divRef.current) return;
+
     const div = divRef.current;
     const rect = div.getBoundingClientRect();
+
     setPosition({ x: e.clientX - rect.left, y: e.clientY - rect.top });
   };
 
-  const handleFocus = () => setOpacity(1);
-  const handleBlur = () => setOpacity(0);
+  const handleFocus = () => {
+    setIsFocused(true);
+    setOpacity(1);
+  };
+
+  const handleBlur = () => {
+    setIsFocused(false);
+    setOpacity(0);
+  };
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
       ref={divRef}
       onMouseMove={handleMouseMove}
       onMouseEnter={handleFocus}
       onMouseLeave={handleBlur}
-      onClick={() => onClick(project)} // Call onClick with the project data
-      className="relative overflow-hidden rounded-xl border border-slate-800 bg-slate-900/50 px-8 py-10 shadow-2xl cursor-pointer transition-transform hover:scale-[1.02]"
+      onClick={() => onClick(project)}
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-50px" }} // Optim: Only animate when actually in view
+      className="relative overflow-hidden rounded-xl border border-slate-800 bg-slate-900/50 px-8 py-10 shadow-2xl cursor-pointer transition-transform hover:scale-[1.01]" // Reduced scale for performance
     >
+      {/* Optimized Spotlight: Uses inline styles driven by state but throttled by React's batching */}
       <div
-        className="pointer-events-none absolute -inset-px transition duration-300"
+        className="pointer-events-none absolute -inset-px transition-opacity duration-300"
         style={{
           opacity,
-          background: `radial-gradient(600px circle at ${position.x}px ${position.y}px, rgba(0, 216, 255, 0.15), transparent 40%)`,
+          background: `radial-gradient(600px circle at ${position.x}px ${position.y}px, rgba(0, 216, 255, 0.10), transparent 40%)`, // Reduced opacity for cleaner look
         }}
       />
       
@@ -133,14 +145,6 @@ const SpotlightCard = ({ project, onClick }) => { // Added onClick prop
 const Projects = () => {
   const [selectedProject, setSelectedProject] = useState(null);
 
-  const handleProjectClick = (project) => {
-    setSelectedProject(project);
-  };
-
-  const handleCloseModal = () => {
-    setSelectedProject(null);
-  };
-
   return (
     <section className="py-32 relative z-10">
       <div className="max-w-7xl mx-auto px-6">
@@ -150,20 +154,18 @@ const Projects = () => {
                 The Workshop
             </h2>
             <p className="text-slate-400 max-w-2xl">
-                Detailed breakdown of mechanical systems, simulations, and embedded designs.
-                Click on a project to inspect its full technical report.
+                Detailed breakdown of mechanical systems. Click to inspect.
             </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {projectsData.map((project) => ( // Use projectsData here
-            <SpotlightCard key={project.id} project={project} onClick={handleProjectClick} />
+          {projectsData.map((project, index) => (
+            // Optim: Add index to key
+            <SpotlightCard key={project.id || index} project={project} onClick={setSelectedProject} />
           ))}
         </div>
       </div>
-      
-      {/* The Project Modal */}
-      <ProjectModal project={selectedProject} onClose={handleCloseModal} />
+      <ProjectModal project={selectedProject} onClose={() => setSelectedProject(null)} />
     </section>
   );
 };

@@ -29,11 +29,11 @@ const Hero = () => {
             </h2>
             
            <h1 className="text-5xl md:text-7xl font-black leading-none mb-6">
-                <GlitchText text="DESIGN." className="block" />
-                <span className="text-slate-600">SIMULATE.</span> <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00d8ff] to-white">
-                BUILD.
-                </span>
+            <GlitchText text="DESIGN." className="block" />
+            <span className="text-slate-600">SIMULATE.</span> <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00d8ff] to-white">
+            BUILD.
+            </span>
            </h1>
 
             <p className="text-slate-400 text-lg max-w-md leading-relaxed border-l-2 border-slate-800 pl-6 mb-8">
@@ -55,14 +55,18 @@ const Hero = () => {
 
       {/* RIGHT SIDE: The Machine (Canvas) */}
       <div className="absolute inset-0 md:static md:w-1/2 h-full z-10 opacity-40 md:opacity-100 pointer-events-none md:pointer-events-auto">
-        <Canvas camera={{ position: [3, 2, 5], fov: 50 }}>
+        <Canvas 
+          camera={{ position: [3, 2, 5], fov: 50 }}
+          dpr={[1, 2]} // <--- OPTIMIZATION: Clamps pixel ratio to max 2 (saves battery on 4k screens)
+          gl={{ antialias: true, powerPreference: "high-performance" }} // Explicitly request perf
+        >
           <ambientLight intensity={0.5} />
           <directionalLight position={[10, 10, 5]} intensity={1} color="#00d8ff" />
           <directionalLight position={[-10, -10, -5]} intensity={0.5} color="#ff0000" />
           
-          {/* We position the mesh slightly to the right to balance the text */}
           <EngineeringMesh position={[0, 0, 0]} />
           
+          {/* Disable zooming to keep the layout stable */}
           <OrbitControls enableZoom={false} autoRotate autoRotateSpeed={0.5} />
         </Canvas>
       </div>

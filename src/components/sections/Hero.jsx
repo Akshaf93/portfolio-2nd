@@ -32,7 +32,7 @@ const Hero = () => {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8 }}
             >
-                <h2 className="text-[#00d8ff] font-mono text-xs sm:text-sm tracking-[0.3em] mb-4 bg-[#00d8ff]/5 inline-block px-2 py-1 rounded border border-[#00d8ff]/20">
+                <h2 className="text-[#00d8ff] font-mono text-xs sm:text-sm tracking-[0.3em] mb-4 inline-block">
                     /// ENGINEERING_PORTFOLIO
                 </h2>
                 
@@ -49,50 +49,34 @@ const Hero = () => {
                     Bridging the gap between solid mechanics, thermodynamics, and embedded systems.
                 </p>
 
-                {/* --- UPGRADED ACTION AREA --- */}
-                <div className="flex flex-col lg:flex-row gap-6 items-start lg:items-center">
+                {/* --- SIMPLE HUD ACTION AREA --- */}
+                <div className="flex flex-col sm:flex-row gap-8 items-start sm:items-center">
                     
-                    {/* 1. Primary Button */}
-                    <button className="px-8 py-4 bg-[#00d8ff] text-slate-950 font-bold text-sm hover:bg-white transition-all tracking-widest shadow-[0_0_20px_rgba(0,216,255,0.3)] hover:shadow-[0_0_40px_rgba(0,216,255,0.5)] clip-path-polygon w-full lg:w-auto">
+                    {/* 1. Primary Button (Solid) */}
+                    <button className="px-8 py-4 bg-[#00d8ff] text-slate-950 font-bold text-sm hover:bg-white transition-all tracking-widest shadow-[0_0_20px_rgba(0,216,255,0.3)] hover:shadow-[0_0_40px_rgba(0,216,255,0.5)] clip-path-polygon">
                         VIEW SCHEMATICS
                     </button>
                     
-                    {/* 2. The Holographic "Latest Build" Indicator */}
-                    <motion.div 
-                      whileHover={{ 
-                          scale: 1.05, 
-                          boxShadow: "0 0 30px rgba(0, 216, 255, 0.2)",
-                          borderColor: "#00d8ff"
-                       }}
-                      className="relative flex items-center justify-center gap-3 bg-slate-900/40 backdrop-blur-md border border-slate-700 p-3 pr-4 rounded-lg cursor-pointer transition-all group w-full lg:w-auto text-sm font-mono text-slate-300 overflow-hidden"
-                    >
-                        {/* Animated Border Glow (subtle) */}
-                        <div className="absolute inset-0 rounded-lg pointer-events-none group-hover:animate-border-glow border border-transparent"
-                            style={{
-                                backgroundImage: `linear-gradient(90deg, transparent, rgba(0,216,255,0.3), transparent)`
-                            }}
-                        ></div>
+                    {/* 2. The "HUD" Latest Build (Minimalist) */}
+                    {/* No background, just a vertical data line */}
+                    <div className="flex items-center gap-4 group cursor-pointer">
+                        {/* The HUD Vertical Line Indicator */}
+                        <div className="h-10 w-[2px] bg-slate-700 group-hover:bg-[#00d8ff] transition-colors duration-300"></div>
 
-
-                        {/* Data Stream Indicator (replacing gear icon) */}
-                        <div className="relative w-4 h-4 mr-1 flex items-center justify-center">
-                            <span className="absolute w-2 h-2 rounded-full bg-[#00d8ff]/50 animate-pulse-slow"></span>
-                            <span className="absolute w-1 h-1 rounded-full bg-[#00d8ff]"></span>
+                        {/* The Raw Data */}
+                        <div className="flex flex-col justify-center">
+                             <span className="text-[10px] text-slate-500 font-mono tracking-widest uppercase mb-1 group-hover:text-[#00d8ff] transition-colors">
+                                 /// LATEST_BUILD
+                             </span>
+                             <div className="flex items-center gap-2">
+                                <span className="text-sm font-bold text-white font-mono tracking-wider">
+                                    ASME ROVER V2
+                                </span>
+                                {/* Simple Green LED Dot */}
+                                <span className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse shadow-[0_0_8px_#22c55e]"></span>
+                             </div>
                         </div>
-
-                        {/* Text */}
-                        <span className="text-[11px] text-slate-400 uppercase tracking-widest mr-2">LIVE FEED:</span>
-                        <span className="text-sm font-bold text-white group-hover:text-[#00d8ff] transition-colors">
-                            ASME ROVER V2 // {new Date().getFullYear()}
-                        </span>
-                        
-                        {/* Enhanced Pulse Indicator */}
-                        <span className="relative flex h-3 w-3 ml-2">
-                          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                          <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500 shadow-[0_0_10px_#22c55e]"></span>
-                        </span>
-                        
-                    </motion.div>
+                    </div>
                     
                 </div>
             </motion.div>

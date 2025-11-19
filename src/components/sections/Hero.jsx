@@ -3,6 +3,7 @@ import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import EngineeringMesh from '../canvas/EngineeringMesh';
 import { motion } from 'framer-motion';
+import GlitchText from '../ui/GlitchText';
 
 const Hero = () => {
   return (
@@ -27,11 +28,13 @@ const Hero = () => {
                 ENGINEERING PORTFOLIO
             </h2>
             
-            <h1 className="text-5xl md:text-7xl font-black leading-none mb-6">
-                DESIGN. <br />
+           <h1 className="text-5xl md:text-7xl font-black leading-none mb-6">
+                <GlitchText text="DESIGN." className="block" />
                 <span className="text-slate-600">SIMULATE.</span> <br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00d8ff] to-white">
                 BUILD.
-            </h1>
+                </span>
+           </h1>
 
             <p className="text-slate-400 text-lg max-w-md leading-relaxed border-l-2 border-slate-800 pl-6 mb-8">
                 Mechanical Engineering student at <strong className="text-slate-200">NUST</strong>. 

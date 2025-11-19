@@ -1,47 +1,95 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
-const skills = [
-  { category: "CAD & Simulation", items: ["SolidWorks", "ANSYS", "AutoCAD", "Fusion 360"] },
-  { category: "Prototyping", items: ["3D Printing (FDM/SLA)", "Laser Cutting", "CNC Basics", "Arduino/ESP32"] },
-  { category: "Computational", items: ["MATLAB", "Python", "C++", "MathCAD"] },
+const techStack = [
+  { 
+    category: "DESIGN & CAD", 
+    skills: [
+      { name: "SolidWorks", level: 90 }, // 90% width
+      { name: "Fusion 360", level: 80 },
+      { name: "Blender (Rendering)", level: 60 }
+    ]
+  },
+  { 
+    category: "SIMULATION & ANALYSIS", 
+    skills: [
+      { name: "ANSYS Fluent (CFD)", level: 75 },
+      { name: "Static FEA", level: 85 },
+      { name: "MATLAB / Simulink", level: 70 }
+    ]
+  },
+  { 
+    category: "EMBEDDED SYSTEMS", 
+    skills: [
+      { name: "Raspberry Pi / Linux", level: 80 },
+      { name: "C++ / Arduino", level: 85 },
+      { name: "Python Automation", level: 75 }
+    ]
+  }
 ];
+
+const SkillBar = ({ skill, index }) => {
+  return (
+    <div className="mb-4">
+      <div className="flex justify-between text-xs font-mono mb-1">
+        <span className="text-slate-300">{skill.name}</span>
+        <span className="text-[#00d8ff]">{skill.level}% CAPACITY</span>
+      </div>
+      {/* The Bar Background */}
+      <div className="h-2 bg-slate-800 w-full rounded-sm overflow-hidden border border-slate-700 relative">
+        {/* The Fill Animation */}
+        <motion.div 
+          initial={{ width: 0 }}
+          whileInView={{ width: `${skill.level}%` }}
+          transition={{ duration: 1, delay: index * 0.1, ease: "easeOut" }}
+          className="h-full bg-[#00d8ff] relative"
+        >
+            {/* Add a glow effect to the end of the bar */}
+            <div className="absolute right-0 top-0 bottom-0 w-2 bg-white blur-[4px]" />
+        </motion.div>
+      </div>
+    </div>
+  );
+};
 
 const Skills = () => {
   return (
-    <section className="py-24 bg-slate-950">
-      <div className="max-w-7xl mx-auto px-6">
-        <motion.h2 
-          initial={{ opacity: 0, x: -50 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          className="text-4xl font-black mb-12 text-right border-r-4 border-[#00d8ff] pr-4"
-        >
-          Technical Specs
-        </motion.h2>
+    <section className="py-32 relative border-t border-slate-800/50 bg-slate-900/20">
+      <div className="max-w-6xl mx-auto px-6">
+        
+        <div className="flex flex-col md:flex-row justify-between items-end mb-16">
+          <div>
+            <h2 className="text-4xl font-black text-white mb-2">SYSTEM TELEMETRY</h2>
+            <p className="text-slate-400 font-mono text-sm">/// TECHNICAL_PROFICIENCY_LOG</p>
+          </div>
+          {/* Decorative Binary Decoration */}
+          <div className="hidden md:block font-mono text-[10px] text-slate-600 text-right leading-tight">
+            01001101 01000101 01000011 01001000<br/>
+            SYSTEM OPTIMIZED // READY
+          </div>
+        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {skills.map((skillSet, index) => (
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+          {techStack.map((stack, idx) => (
             <motion.div 
-              key={index}
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: index * 0.2 }}
-              className="bg-slate-900 p-8 rounded-xl border-t border-slate-800 hover:border-[#00d8ff] transition-colors"
+              key={idx}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: idx * 0.2 }}
+              className="bg-slate-950/50 p-6 border border-slate-800 rounded-xl"
             >
-              <h3 className="text-xl font-bold text-[#00d8ff] mb-6 font-mono">
-                0{index + 1}. {skillSet.category}
+              <h3 className="text-[#00d8ff] font-mono text-sm font-bold mb-6 border-b border-slate-800 pb-2 tracking-widest">
+                {stack.category}
               </h3>
-              <ul className="space-y-3">
-                {skillSet.items.map((item) => (
-                  <li key={item} className="flex items-center text-slate-300">
-                    <span className="w-2 h-2 bg-slate-600 mr-3 rounded-full"></span>
-                    {item}
-                  </li>
+              <div>
+                {stack.skills.map((skill, i) => (
+                  <SkillBar key={skill.name} skill={skill} index={i} />
                 ))}
-              </ul>
+              </div>
             </motion.div>
           ))}
         </div>
+
       </div>
     </section>
   );

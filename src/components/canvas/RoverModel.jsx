@@ -1,25 +1,33 @@
 import React, { useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
+import { useGLTF } from '@react-three/drei';
 
-// DEBUG VERSION: No external file loading, just a shape.
 const RoverModel = (props) => {
   const meshRef = useRef();
+  
+  // 1. LOAD THE FILE
+  const { scene } = useGLTF('/models/rover.glb');
 
   useFrame((state, delta) => {
     if (meshRef.current) {
-      meshRef.current.rotation.y += delta; // Spin it
-      meshRef.current.rotation.x += delta * 0.5;
+      meshRef.current.rotation.y += delta * 0.1; // Slow rotation
     }
   });
 
   return (
-    <mesh ref={meshRef} {...props}>
-      {/* A generic box, 2x2x2 units */}
-      <boxGeometry args={[2, 2, 2]} />
-      {/* Bright orange wireframe so it's impossible to miss */}
-      <meshStandardMaterial color="orange" wireframe={true} />
-    </mesh>
+    <group {...props}>
+      {/* 2. SCALE ADJUSTMENT
+         Start with 0.01. If it's invisible, try 0.1 or 1.0.
+         If it's black, the ModalViewer environment handles lighting.
+      */}
+      <mesh ref={meshRef} scale={0.01}> 
+        <primitive object={scene} />
+      </mesh>
+    </group>
   );
 };
+
+// Preload makes it open faster
+useGLTF.preload('/models/rover.glb');
 
 export default RoverModel;

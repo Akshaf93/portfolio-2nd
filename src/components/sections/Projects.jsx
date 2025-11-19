@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import ProjectModal from '../ui/ProjectModal';
 // Import the specific model component
-import RoverModel from '../canvas/RoverModel'; 
+
 
 const projectsData = [
   {
@@ -14,8 +14,6 @@ const projectsData = [
     tech: ["SolidWorks", "FEA", "Aluminum"],
     
     // HERE IS THE MAGIC: We pass the component itself
-    ModelComponent: RoverModel, 
-    
     fullDesc: {
       overview: "Designed and fabricated a robust robotic rover...",
       challenge: "Balancing lightweight design with structural integrity...",

@@ -1,27 +1,26 @@
 import React, { useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import ProjectModal from '../ui/ProjectModal';
- // Import the new modal component
+// Import the specific model component
+import RoverModel from '../canvas/RoverModel'; 
 
-const projectsData = [ // Renamed to avoid conflict
+const projectsData = [
   {
     id: "01",
     title: "ASME EFX Rover",
-    status: "Designing",
-    category: "Robotics / Additive Manufacturing",
-    desc: "Competition-ready 3d printed all terrain rover. Optimized suspension geometry for rough terrain using SolidWorks Simulation.",
-    tech: ["SolidWorks", "FEA", "3D Printing", "Robotics", "Mechanical Design"],
-    githubLink: "https://github.com/yourusername/rover-project", // Link to your GitHub repo
+    status: "Manufacturing",
+    category: "Robotics",
+    desc: "Competition-ready rover chassis. Optimized suspension geometry for rough terrain.",
+    tech: ["SolidWorks", "FEA", "Aluminum"],
+    
+    // HERE IS THE MAGIC: We pass the component itself
+    ModelComponent: RoverModel, 
+    
     fullDesc: {
-      overview: "Designed and fabricated a robust robotic rover for the ASME IAM3d Competition. Focused on modularity, ease of assembly, and off-road mobility to navigate diverse terrains and complete mission objectives.",
-      challenge: "The primary challenge was to balance lightweight design with structural integrity to carry payloads and withstand harsh competition environments. Iterative design was crucial to optimize the suspension system for maximum ground contact and stability.",
-      approachPoints: [
-        "Conceptualized multiple chassis architectures in SolidWorks, evaluating trade-offs between cost, weight, and manufacturability.",
-        "Performed Finite Element Analysis (FEA) on critical components (e.g., suspension arms, chassis frame) to identify stress concentrations and optimize material usage.",
-        "Developed a custom rock-bogie suspension system for improved articulation and traction over obstacles.",
-        "Utilized 3D printing for rapid prototyping and custom brackets, while key structural elements were CNC machined from aluminum.",
-      ],
-      results: "The final rover achieved a competitive weight-to-strength ratio, demonstrating excellent mobility and payload capacity during preliminary testing. Key learnings included advanced SolidWorks simulation techniques, design for additive manufacturing, and interdisciplinary teamwork."
+      overview: "Designed and fabricated a robust robotic rover...",
+      challenge: "Balancing lightweight design with structural integrity...",
+      approachPoints: ["Custom rock-bogie suspension.", "FEA on chassis frame."],
+      results: "Achieved competitive weight-to-strength ratio."
     }
   },
   {
@@ -29,21 +28,20 @@ const projectsData = [ // Renamed to avoid conflict
     title: "High-Torque Sprocket",
     status: "Prototyping",
     category: "Component Design",
-    desc: "Parametric design of a drive sprocket for a 22mm pitch track. Calculated stress distribution on tooth profile.",
-    tech: ["Gear Design", "SolidWorks", "3D Printing (PLA)", "Machining", "Material Science"],
-    githubLink: "https://github.com/yourusername/sprocket-project",
+    desc: "Parametric design of a drive sprocket for a 22mm pitch track.",
+    tech: ["Gear Design", "3D Printing"],
+    
+    // If you don't have a model for this yet, leave it undefined or null
+    ModelComponent: null, 
+    
     fullDesc: {
-        overview: "Designed a custom drive sprocket tailored for a specific 22mm pitch track system, focusing on efficient power transmission and durability under high torque loads. This project involved detailed gear geometry calculations and material selection.",
-        challenge: "Ensuring adequate tooth strength to prevent failure under peak load conditions, while minimizing material and manufacturing complexity. Accurately modeling the contact forces between the sprocket and track links was critical.",
-        approachPoints: [
-            "Implemented parametric modeling in SolidWorks to easily modify tooth count, pitch diameter, and bore size.",
-            "Conducted stress analysis (FEA) on the tooth profiles to verify structural integrity and identify potential failure points.",
-            "Compared various manufacturing methods (CNC vs. 3D printing) for rapid prototyping and final production.",
-            "Selected appropriate material (e.g., hardened steel vs. high-strength polymer) based on application requirements and cost efficiency."
-        ],
-        results: "The resulting sprocket design met all torque specifications with a robust factor of safety. The project enhanced understanding of gear design principles, material selection criteria, and advanced CAD functionalities for component optimization."
+       overview: "Parametric design...",
+       challenge: "Tooth profile stress...",
+       approachPoints: ["Calculated stress distribution.", "Iterative prototyping."],
+       results: "Successful test fit."
     }
   },
+
   {
     id: "03",
     title: "Turbulent Flow Pipe",

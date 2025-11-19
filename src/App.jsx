@@ -7,19 +7,40 @@ import Contact from './components/sections/Contact';
 
 function App() {
   return (
-    <div className="bg-slate-900 min-h-screen text-white selection:bg-[#00d8ff] selection:text-slate-900">
+    <div className="relative min-h-screen text-white selection:bg-[#00d8ff] selection:text-slate-900 font-sans">
+      
+      {/* --- BACKGROUND LAYERS --- */}
+      <div className="bg-grid"></div>
+      <div className="bg-vignette"></div>
+      <div className="bg-noise"></div>
+
+      {/* --- HUD FRAME (The "Click" Factor) --- */}
+      {/* This adds a fixed border and technical markings around the screen */}
+      <div className="fixed inset-4 border border-slate-800 pointer-events-none z-40 rounded-sm hidden md:block">
+        {/* Top Left Corner */}
+        <div className="absolute -top-1 -left-1 w-4 h-4 border-t-2 border-l-2 border-[#00d8ff]"></div>
+        {/* Bottom Right Corner */}
+        <div className="absolute -bottom-1 -right-1 w-4 h-4 border-b-2 border-r-2 border-[#00d8ff]"></div>
+        
+        {/* Decorative Lines */}
+        <div className="absolute top-1/2 -left-1 w-2 h-8 bg-slate-900 border-y border-slate-600"></div>
+        <div className="absolute top-1/2 -right-1 w-2 h-8 bg-slate-900 border-y border-slate-600"></div>
+        
+        {/* Status Text */}
+        <div className="absolute bottom-4 right-6 font-mono text-[10px] text-[#00d8ff] opacity-50 tracking-widest">
+          SYS.VER.2.0 // ONLINE
+        </div>
+      </div>
+
       <Navbar />
       
-      <main>
+      <main className="relative z-10">
         <Hero />
         <Projects />
         <Skills />
         <Contact />
       </main>
 
-      <footer className="py-6 text-center text-slate-600 text-sm font-mono border-t border-slate-800">
-        © {new Date().getFullYear()} Mechanical Engineering Portfolio. Built with React & Three.js.
-      </footer>
     </div>
   );
 }

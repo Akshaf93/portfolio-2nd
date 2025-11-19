@@ -1,56 +1,71 @@
 import React from 'react';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
-import { motion } from 'framer-motion'; // Import motion
 import EngineeringMesh from '../canvas/EngineeringMesh';
+import { motion } from 'framer-motion';
 
 const Hero = () => {
   return (
-    <section className="relative w-full h-screen mx-auto overflow-hidden">
+    <section className="relative w-full h-screen flex items-center">
       
-      <div className="absolute inset-0 top-[120px] max-w-7xl mx-auto px-6 flex flex-col items-start gap-5 z-10 pointer-events-none">
+      {/* LEFT SIDE: The Specs (Text) */}
+      <div className="w-full md:w-1/2 pl-8 md:pl-24 z-20 flex flex-col justify-center h-full">
         
-        {/* Small decorative label */}
-        <span className="text-[#00d8ff] font-mono text-xs tracking-[0.2em] border border-[#00d8ff]/30 px-2 py-1 bg-[#00d8ff]/10 rounded">
-          SYSTEM STATUS: ONLINE
-        </span>
+        {/* Animated Line */}
+        <motion.div 
+          initial={{ height: 0 }} 
+          animate={{ height: "100px" }} 
+          className="w-[1px] bg-gradient-to-b from-transparent via-[#00d8ff] to-transparent absolute left-6 md:left-16 top-1/3"
+        />
 
-        {/* High Impact Headline */}
-        <h1 className="text-white font-black text-6xl sm:text-8xl leading-tight">
-          ALEX <br />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00d8ff] to-slate-500">
-            BUILDER.
-          </span>
-        </h1>
-        
-        {/* Value Proposition - Typewriter Effect */}
-        <motion.p 
-          initial={{ width: 0 }}
-          animate={{ width: "100%" }}
-          transition={{ duration: 2, ease: "easeInOut" }}
-          className="mt-2 text-slate-400 text-xl sm:text-2xl max-w-lg font-mono overflow-hidden whitespace-nowrap border-r-4 border-[#00d8ff]"
+        <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
         >
-          Transforming concepts into solid mechanics.
-        </motion.p>
+            <h2 className="text-[#00d8ff] font-mono text-sm tracking-[0.3em] mb-4">
+                ENGINEERING PORTFOLIO
+            </h2>
+            
+            <h1 className="text-5xl md:text-7xl font-black leading-none mb-6">
+                DESIGN. <br />
+                <span className="text-slate-600">SIMULATE.</span> <br />
+                BUILD.
+            </h1>
 
-        <div className="pointer-events-auto mt-8 flex gap-4">
-           <button className="bg-[#00d8ff] text-slate-900 font-bold py-3 px-8 rounded hover:bg-white transition-colors shadow-[0_0_20px_rgba(0,216,255,0.3)]">
-             Inspect Projects
-           </button>
-           <button className="border border-slate-600 text-slate-300 font-bold py-3 px-8 rounded hover:border-[#00d8ff] hover:text-[#00d8ff] transition-colors font-mono">
-             Download CV
-           </button>
-        </div>
+            <p className="text-slate-400 text-lg max-w-md leading-relaxed border-l-2 border-slate-800 pl-6 mb-8">
+                Mechanical Engineering student at <strong className="text-slate-200">NUST</strong>. 
+                Specializing in CAD design, embedded robotics, and structural analysis.
+            </p>
+
+            <div className="flex gap-4">
+                <button className="px-8 py-3 bg-[#00d8ff] text-slate-950 font-bold hover:bg-white transition-all clip-path-polygon">
+                    VIEW SCHEMATICS
+                </button>
+                <div className="flex flex-col justify-center">
+                    <span className="text-[10px] text-slate-500 font-mono uppercase">Latest Build</span>
+                    <span className="text-xs text-white font-mono">ASME ROVER V2</span>
+                </div>
+            </div>
+        </motion.div>
       </div>
 
-      <div className="absolute inset-0 w-full h-full z-0">
-        <Canvas camera={{ position: [0, 0, 6], fov: 75 }}>
+      {/* RIGHT SIDE: The Machine (Canvas) */}
+      <div className="absolute inset-0 md:static md:w-1/2 h-full z-10 opacity-40 md:opacity-100 pointer-events-none md:pointer-events-auto">
+        <Canvas camera={{ position: [3, 2, 5], fov: 50 }}>
           <ambientLight intensity={0.5} />
-          <directionalLight position={[10, 10, 5]} intensity={1} />
-          <EngineeringMesh position={[2.5, 0, 0]} />
-          <OrbitControls enableZoom={false} />
+          <directionalLight position={[10, 10, 5]} intensity={1} color="#00d8ff" />
+          <directionalLight position={[-10, -10, -5]} intensity={0.5} color="#ff0000" />
+          
+          {/* We position the mesh slightly to the right to balance the text */}
+          <EngineeringMesh position={[0, 0, 0]} />
+          
+          <OrbitControls enableZoom={false} autoRotate autoRotateSpeed={0.5} />
         </Canvas>
       </div>
+
+      {/* Bottom Gradient Fade */}
+      <div className="absolute bottom-0 w-full h-24 bg-gradient-to-t from-[#050a14] to-transparent z-20 pointer-events-none" />
     </section>
   );
 };

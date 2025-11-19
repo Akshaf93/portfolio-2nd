@@ -3,43 +3,32 @@
 @tailwind utilities;
 
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-  
-  color-scheme: dark;
-  background-color: #0f172a; /* Matching the slate-900 theme */
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  background-color: #0b1121; /* Darker, deeper slate */
+  color: #ffffff;
 }
 
-/* The "Engineering" Scrollbar */
-::-webkit-scrollbar {
-  width: 10px;
+/* THE ENGINEERING GRID BACKGROUND */
+body {
+  background-color: #0b1121;
+  background-image: 
+    linear-gradient(rgba(30, 41, 59, 0.5) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(30, 41, 59, 0.5) 1px, transparent 1px);
+  background-size: 40px 40px; /* The size of the grid squares */
+  background-position: -1px -1px;
 }
 
-::-webkit-scrollbar-track {
-  background: #0f172a;
+/* A vignette overlay to make the center pop */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at 50% 50%, transparent 20%, #0b1121 100%);
+  pointer-events: none;
+  z-index: -1;
 }
 
-::-webkit-scrollbar-thumb {
-  background: #334155; 
-  border: 2px solid #0f172a; /* Creates a padding effect */
-  border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #00d8ff; /* Cyan highlight on interaction */
-}
-
-/* Utility to hide scrollbar for clean 3D canvas if needed */
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
-}
-
-.no-scrollbar {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
-}
+/* Custom Scrollbar */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: #0b1121; }
+::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #00d8ff; }

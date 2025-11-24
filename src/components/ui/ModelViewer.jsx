@@ -29,7 +29,7 @@ const ModelViewer = ({ children }) => {
                1. Changed preset to 'rembrandt' (softer) 
                2. Lowered intensity to 0.15 (prevents whiteout)
             */}
-            <Stage environment="city" intensity={0.15} contactShadow={false}>
+            <Stage environment="city" intensity={0.05} contactShadow={false}>
               {children}
             </Stage>
           </Suspense>

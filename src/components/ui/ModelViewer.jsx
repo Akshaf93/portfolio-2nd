@@ -1,27 +1,38 @@
 import React, { Suspense } from 'react';
 import { Canvas } from '@react-three/fiber';
-import { Stage, OrbitControls } from '@react-three/drei';
-import ErrorBoundary from './ErrorBoundary'; // Import the shield
+import { Stage, OrbitControls, Html, useProgress } from '@react-three/drei';
+import ErrorBoundary from './ErrorBoundary';
+
+// Custom Loader Component that tracks download %
+function Loader() {
+  const { progress } = useProgress();
+  return (
+    <Html center>
+      <div className="text-[#00d8ff] font-mono text-xs whitespace-nowrap bg-slate-900/80 px-2 py-1 rounded border border-slate-700">
+        LOADING_CAD_DATA... {progress.toFixed(0)}%
+      </div>
+    </Html>
+  );
+}
 
 const ModelViewer = ({ children }) => {
   return (
     <div className="w-full h-[400px] bg-slate-950 rounded-lg overflow-hidden border border-slate-800 relative">
       
-      {/* Loading Text */}
-      <div className="absolute inset-0 flex items-center justify-center text-[#00d8ff] font-mono text-xs pointer-events-none z-0">
-        LOADING_CAD_DATA...
-      </div>
-
-      {/* 1. WRAP CANVAS IN ERROR BOUNDARY */}
+      {/* ERROR BOUNDARY WRAPPER */}
       <ErrorBoundary>
         <Canvas 
           dpr={[1, 2]} 
           camera={{ fov: 45 }} 
           shadows
-          className="relative z-10"
+          className="relative z-10 bg-slate-950" // Added bg color to canvas to hide anything behind it
         >
-          <Suspense fallback={null}>
-            <Stage environment="city" intensity={0.6} contactShadow={false}>
+          {/* Use the Loader as the fallback */}
+          <Suspense fallback={<Loader />}>
+            {/* Visual Fix: 'rembrandt' preset usually looks better for engineering models 
+                than 'city'. It has softer shadows.
+            */}
+            <Stage environment="city" intensity={0.5} contactShadow={false}>
               {children}
             </Stage>
           </Suspense>

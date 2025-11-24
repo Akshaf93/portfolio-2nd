@@ -1,9 +1,21 @@
-import React from 'react';
+import React, { useEffect } from 'react'; // Import useEffect
 import { motion, AnimatePresence } from 'framer-motion';
 import ModelViewer from './ModelViewer';
 import RoverModel from '../canvas/RoverModel'; 
 
 const ProjectModal = ({ project, onClose }) => {
+  // 1. SCROLL LOCK EFFECT
+  useEffect(() => {
+    if (project) {
+      // Prevent scrolling on the main page
+      document.body.style.overflow = 'hidden';
+    }
+    return () => {
+      // Re-enable scrolling when modal closes
+      document.body.style.overflow = 'unset';
+    };
+  }, [project]);
+
   if (!project) return null;
 
   const isRoverProject = project.title.includes("Rover") || project.id === "01";
@@ -11,8 +23,6 @@ const ProjectModal = ({ project, onClose }) => {
   return (
     <AnimatePresence>
       {project && (
-        // 1. OVERLAY: z-[999] ensures it's on top of Navbar. 
-        // 'fixed inset-0' covers the whole screen.
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -20,7 +30,6 @@ const ProjectModal = ({ project, onClose }) => {
           className="fixed inset-0 z-[999] flex items-center justify-center bg-black/90 backdrop-blur-md p-4 md:p-8"
           onClick={onClose}
         >
-          {/* 2. MODAL BOX: max-h is key here to prevent it from going off-screen */}
           <motion.div
             initial={{ y: 50, opacity: 0, scale: 0.95 }}
             animate={{ y: 0, opacity: 1, scale: 1 }}
@@ -28,7 +37,6 @@ const ProjectModal = ({ project, onClose }) => {
             className="bg-slate-900 border border-slate-700 w-full max-w-5xl max-h-[90vh] rounded-lg shadow-2xl overflow-hidden flex flex-col relative"
             onClick={(e) => e.stopPropagation()}
           >
-            
             {/* Header */}
             <div className="p-6 border-b border-slate-800 flex justify-between items-center bg-slate-950 shrink-0">
               <div>
@@ -42,10 +50,10 @@ const ProjectModal = ({ project, onClose }) => {
               <button onClick={onClose} className="text-slate-400 hover:text-white text-2xl font-bold p-2">&times;</button>
             </div>
 
-            {/* Content - This area scrolls, but the modal stays fixed */}
+            {/* Content */}
             <div className="overflow-y-auto custom-scrollbar flex-grow p-6">
               
-              {/* 3D Viewer */}
+              {/* 3D Viewer Area */}
               <div className="mb-8">
                  {isRoverProject ? (
                     <ModelViewer>
@@ -67,6 +75,7 @@ const ProjectModal = ({ project, onClose }) => {
                            {project.fullDesc?.overview || project.desc}
                         </p>
                     </div>
+                    {/* Add Challenge/Solution sections if available */}
                 </div>
 
                 <div className="space-y-6">

@@ -104,7 +104,7 @@ const SpotlightCard = ({ project, onClick }) => {
         className="pointer-events-none absolute -inset-px transition-opacity duration-300"
         style={{
           opacity,
-          background: `radial-gradient(600px circle at ${position.x}px ${position.y}px, rgba(0, 216, 255, 0.10), transparent 40%)`, // Reduced opacity for cleaner look
+          background: `radial-gradient(800px circle at ${position.x}px ${position.y}px, rgba(0, 216, 255, 0.05), transparent 40%)`, // Reduced opacity for cleaner look
         }}
       />
       

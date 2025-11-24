@@ -8,7 +8,7 @@ function Loader() {
   return (
     <Html center>
       <div className="text-[#00d8ff] font-mono text-xs whitespace-nowrap bg-slate-900/80 px-2 py-1 rounded border border-slate-700">
-        LOADING_CAD_DATA... {progress.toFixed(0)}%
+        LOADING_PLASTIC_MATRIX... {progress.toFixed(0)}%
       </div>
     </Html>
   );
@@ -16,20 +16,27 @@ function Loader() {
 
 const ModelViewer = ({ children }) => {
   return (
-    <div className="w-full h-[400px] bg-slate-950 rounded-lg overflow-hidden border border-slate-800 relative">
+    <div className="w-full h-[400px] bg-slate-950 rounded-lg overflow-hidden border border-slate-800 relative shadow-inner">
       <ErrorBoundary>
         <Canvas 
           dpr={[1, 2]} 
-          camera={{ fov: 45 }} 
+          camera={{ fov: 40, position: [4, 4, 4] }} 
           shadows
-          className="relative z-10 bg-slate-950"
+          className="relative z-10 bg-slate-900" 
         >
           <Suspense fallback={<Loader />}>
-            {/* FIX: 
-               1. Changed preset to 'rembrandt' (softer) 
-               2. Lowered intensity to 0.15 (prevents whiteout)
+            {/* PLASTIC LIGHTING SETUP:
+               - environment="studio": Very soft, neutral white light. No harsh reflections.
+               - intensity={0.6}: Keeps it from glowing.
+               - contactShadow opacity={0.5}: Softer shadow on the floor.
             */}
-            <Stage environment="city" intensity={0.05} contactShadow={false}>
+            <Stage 
+                environment="studio" 
+                intensity={0.6} 
+                contactShadow={true} 
+                shadows="contact" 
+                adjustCamera={true}
+            >
               {children}
             </Stage>
           </Suspense>

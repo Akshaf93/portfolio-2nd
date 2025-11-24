@@ -3,7 +3,6 @@ import { Canvas } from '@react-three/fiber';
 import { Stage, OrbitControls, Html, useProgress } from '@react-three/drei';
 import ErrorBoundary from './ErrorBoundary';
 
-// Custom Loader Component that tracks download %
 function Loader() {
   const { progress } = useProgress();
   return (
@@ -18,21 +17,19 @@ function Loader() {
 const ModelViewer = ({ children }) => {
   return (
     <div className="w-full h-[400px] bg-slate-950 rounded-lg overflow-hidden border border-slate-800 relative">
-      
-      {/* ERROR BOUNDARY WRAPPER */}
       <ErrorBoundary>
         <Canvas 
           dpr={[1, 2]} 
           camera={{ fov: 45 }} 
           shadows
-          className="relative z-10 bg-slate-950" // Added bg color to canvas to hide anything behind it
+          className="relative z-10 bg-slate-950"
         >
-          {/* Use the Loader as the fallback */}
           <Suspense fallback={<Loader />}>
-            {/* Visual Fix: 'rembrandt' preset usually looks better for engineering models 
-                than 'city'. It has softer shadows.
+            {/* FIX: 
+               1. Changed preset to 'rembrandt' (softer) 
+               2. Lowered intensity to 0.15 (prevents whiteout)
             */}
-            <Stage environment="city" intensity={0.5} contactShadow={false}>
+            <Stage environment="city" intensity={0.15} contactShadow={false}>
               {children}
             </Stage>
           </Suspense>

@@ -118,3 +118,64 @@ body {
 ::-webkit-scrollbar-thumb { background: #1e293b; }
 ::-webkit-scrollbar-thumb:hover { background: #00d8ff; }
 
+/* --- 3D MODEL VIEWER HOTSPOTS --- */
+
+/* The Button (The Dot) */
+.Hotspot {
+  display: block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: none;
+  background-color: #00d8ff; /* Cyan */
+  box-shadow: 0 0 10px rgba(0, 216, 255, 0.8);
+  cursor: pointer;
+  position: relative;
+  transition: opacity 0.3s;
+}
+
+/* Hide hotspots when not facing the camera */
+.Hotspot:not([data-visible]) {
+  background-color: transparent;
+  border: 2px solid #555;
+  opacity: 0.3;
+}
+
+/* The Label (The Text Box) */
+.HotspotAnnotation {
+  visibility: hidden;
+  background: rgba(15, 23, 42, 0.9); /* slate-900 */
+  border: 1px solid #00d8ff;
+  color: #fff;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: bold;
+  padding: 4px 8px;
+  position: absolute;
+  left: 20px; /* Offset from the dot */
+  top: -5px;
+  white-space: nowrap;
+  border-radius: 2px;
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: all 0.3s ease-in-out;
+  pointer-events: none;
+}
+
+/* Show Label on Hover */
+.Hotspot:hover .HotspotAnnotation {
+  visibility: visible;
+  opacity: 1;
+  transform: translateX(0px);
+}
+
+/* Connecting Line (Optional Detail) */
+.Hotspot:hover .HotspotAnnotation::before {
+  content: "";
+  position: absolute;
+  left: -20px;
+  top: 50%;
+  width: 20px;
+  height: 1px;
+  background-color: #00d8ff;
+}

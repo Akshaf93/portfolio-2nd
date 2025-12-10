@@ -1,24 +1,28 @@
-import React, { useEffect } from 'react'; // Import useEffect
+import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import ModelViewer from './ModelViewer';
-import RoverModel from '../canvas/RoverModel'; 
+// 1. Import the new Google Wrapper
+import GoogleModelViewer from './GoogleModelViewer'; 
 
 const ProjectModal = ({ project, onClose }) => {
-  // 1. SCROLL LOCK EFFECT
+  const [activeView, setActiveView] = useState('model'); 
+  const [activeImageIndex, setActiveImageIndex] = useState(0);
+
   useEffect(() => {
     if (project) {
-      // Prevent scrolling on the main page
       document.body.style.overflow = 'hidden';
+      setActiveView('model'); 
+      setActiveImageIndex(0);
     }
     return () => {
-      // Re-enable scrolling when modal closes
       document.body.style.overflow = 'unset';
     };
   }, [project]);
 
   if (!project) return null;
 
-  const isRoverProject = project.title.includes("Rover") || project.id === "01";
+  // Check if this project has a specific 3D model file
+  const isRoverProject = project.id === "01" || project.title.includes("Rover");
+  const hasGallery = project.gallery && project.gallery.length > 0;
 
   return (
     <AnimatePresence>
@@ -37,58 +41,61 @@ const ProjectModal = ({ project, onClose }) => {
             className="bg-slate-900 border border-slate-700 w-full max-w-5xl max-h-[90vh] rounded-lg shadow-2xl overflow-hidden flex flex-col relative"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Header */}
+            {/* ... (HEADER CODE REMAINS THE SAME) ... */}
             <div className="p-6 border-b border-slate-800 flex justify-between items-center bg-slate-950 shrink-0">
-              <div>
-                <h3 className="text-2xl font-bold text-white font-mono">{project.title}</h3>
-                <div className="flex gap-2 mt-1">
-                  <span className="text-[#00d8ff] text-xs font-mono border border-[#00d8ff]/30 px-2 py-0.5 rounded bg-[#00d8ff]/5">
-                    {project.category || "ENGINEERING"}
-                  </span>
-                </div>
-              </div>
-              <button onClick={onClose} className="text-slate-400 hover:text-white text-2xl font-bold p-2">&times;</button>
+               {/* ... Keep Header Content ... */}
+               <div className="flex gap-2">
+                 <button onClick={() => setActiveView('model')} className={`px-4 py-2 text-xs font-mono font-bold border ${activeView === 'model' ? 'bg-[#00d8ff] text-black border-[#00d8ff]' : 'text-slate-400 border-slate-700'}`}>CAD_VIEW</button>
+                 {hasGallery && <button onClick={() => setActiveView('gallery')} className={`px-4 py-2 text-xs font-mono font-bold border ${activeView === 'gallery' ? 'bg-[#00d8ff] text-black border-[#00d8ff]' : 'text-slate-400 border-slate-700'}`}>GALLERY</button>}
+                 <button onClick={onClose} className="ml-4 text-slate-400 hover:text-white text-2xl font-bold px-2">&times;</button>
+               </div>
             </div>
 
-            {/* Content */}
             <div className="overflow-y-auto custom-scrollbar flex-grow p-6">
               
-              {/* 3D Viewer Area */}
-              <div className="mb-8">
-                 {isRoverProject ? (
-                    <ModelViewer>
-                       <RoverModel />
-                    </ModelViewer>
-                 ) : (
-                    <div className="w-full h-[400px] bg-slate-800 rounded-lg flex items-center justify-center text-slate-500 font-mono">
-                       [STATIC_IMAGE_PLACEHOLDER]
+              <div className="mb-8 w-full h-[450px] bg-slate-950 rounded-lg border border-slate-800 relative overflow-hidden">
+                 
+                 {/* VIEW 1: GOOGLE MODEL VIEWER */}
+                 {activeView === 'model' && (
+                    isRoverProject ? (
+                        // 2. USE THE NEW COMPONENT
+                        <GoogleModelViewer src="/models/rover.glb" />
+                    ) : (
+                        <div className="w-full h-full flex items-center justify-center text-slate-500 font-mono flex-col gap-2">
+                           <span>NO_3D_DATA_AVAILABLE</span>
+                        </div>
+                    )
+                 )}
+
+                 {/* VIEW 2: GALLERY (Keep existing code) */}
+                 {activeView === 'gallery' && (
+                    <div className="w-full h-full flex flex-col">
+                        <div className="flex-grow relative bg-black/50 flex items-center justify-center overflow-hidden">
+                            <img src={project.gallery[activeImageIndex].src} className="max-w-full max-h-full object-contain" alt="gallery" />
+                            <div className="absolute bottom-0 left-0 w-full bg-black/70 p-2 border-t border-slate-800">
+                                <p className="text-[#00d8ff] font-mono text-xs text-center">{project.gallery[activeImageIndex].caption}</p>
+                            </div>
+                        </div>
+                        <div className="h-20 bg-slate-900 border-t border-slate-800 flex items-center gap-2 px-4 overflow-x-auto">
+                            {project.gallery.map((item, idx) => (
+                                <button key={idx} onClick={() => setActiveImageIndex(idx)} className={`w-24 h-16 border-2 shrink-0 ${activeImageIndex === idx ? 'border-[#00d8ff]' : 'border-transparent opacity-50'}`}>
+                                    <img src={item.src} className="w-full h-full object-cover" alt="thumb" />
+                                </button>
+                            ))}
+                        </div>
                     </div>
                  )}
               </div>
 
-              {/* Details */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div className="md:col-span-2 space-y-6">
-                    <div>
-                        <h4 className="text-[#00d8ff] font-mono text-sm font-bold mb-2">/// OBJECTIVE</h4>
-                        <p className="text-slate-300 leading-relaxed text-sm">
-                           {project.fullDesc?.overview || project.desc}
-                        </p>
-                    </div>
-                    {/* Add Challenge/Solution sections if available */}
-                </div>
+              {/* ... (REST OF DETAILS SECTION REMAINS THE SAME) ... */}
+               <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                 {/* ... Keep the objective/tech stack text ... */}
+                  <div className="md:col-span-2 space-y-6">
+                      <h4 className="text-[#00d8ff] font-mono text-sm font-bold mb-2">/// PROJECT_DETAILS</h4>
+                      <p className="text-slate-300 text-sm">{project.fullDesc?.overview || project.desc}</p>
+                  </div>
+               </div>
 
-                <div className="space-y-6">
-                    <div className="bg-slate-950 p-4 rounded border border-slate-800">
-                        <h4 className="text-slate-500 font-mono text-xs mb-3">TECH STACK</h4>
-                        <div className="flex flex-wrap gap-2">
-                            {project.tech && project.tech.map(t => (
-                                <span key={t} className="text-xs text-white bg-slate-800 px-2 py-1 rounded border border-slate-700">{t}</span>
-                            ))}
-                        </div>
-                    </div>
-                </div>
-              </div>
             </div>
           </motion.div>
         </motion.div>

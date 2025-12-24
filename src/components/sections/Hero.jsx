@@ -14,7 +14,6 @@ const Hero = () => {
     >
       
       {/* LEFT SIDE: Text & Controls */}
-    {/* LEFT SIDE: Text & Controls */}
     <div className="w-full md:w-1/2 pl-8 md:pl-24 z-20 flex flex-col justify-center h-full">
       <motion.div
         initial={{ opacity: 0, y: 20 }}

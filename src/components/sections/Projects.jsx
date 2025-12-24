@@ -104,7 +104,7 @@ const SpotlightCard = ({ project, onClick }) => {
         className="pointer-events-none absolute -inset-px transition-opacity duration-300"
         style={{
           opacity,
-          background: `radial-gradient(800px circle at ${position.x}px ${position.y}px, rgba(0, 216, 255, 0.05), transparent 40%)`, // Reduced opacity for cleaner look
+          background: `radial-gradient(800px circle at ${position.x}px ${position.y}px, rgba(45, 212, 191, 0.05), transparent 40%)`, // Reduced opacity for cleaner look
         }}
       />
       
@@ -113,12 +113,12 @@ const SpotlightCard = ({ project, onClick }) => {
              <span className="font-mono text-xs text-slate-500 border border-slate-700 px-2 py-1 rounded">
                 ID: {project.id}
              </span>
-             <span className="font-mono text-xs text-[#00d8ff] bg-[#00d8ff]/10 px-2 py-1 rounded">
+             <span className="font-mono text-xs text-teal-400 bg-teal-500/10 px-2 py-1 rounded">
                 STATUS: {project.status}
              </span>
         </div>
 
-        <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-[#00d8ff] transition-colors">
+        <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-teal-400 transition-colors">
           {project.title}
         </h3>
         
@@ -146,7 +146,7 @@ const Projects = () => {
       <div className="max-w-7xl mx-auto px-6">
         <div className="mb-16">
             <h2 className="text-4xl font-black text-white mb-4">
-                <span className="text-[#00d8ff] font-mono text-lg block mb-2">/// PROJECT_CATALOG</span>
+                <span className="text-teal-400 font-mono text-lg block mb-2">PROJECTS</span>
                 The Workshop
             </h2>
             <p className="text-slate-400 max-w-2xl">

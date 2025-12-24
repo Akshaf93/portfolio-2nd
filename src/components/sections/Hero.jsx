@@ -22,7 +22,7 @@ const Hero = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
       >
-        <h2 className="text-orange-500 font-mono text-xs font-bold tracking-widest mb-6">
+        <h2 className="text-teal-400 font-mono text-xs font-bold tracking-widest mb-6">
           MECHANICAL ENGINEER // DESIGN PORTFOLIO
         </h2>
         
@@ -32,12 +32,12 @@ const Hero = () => {
           <span className="text-slate-400">Fabricate.</span>
         </h1>
 
-        <p className="text-slate-400 text-lg max-w-md leading-relaxed mb-8 border-l-4 border-orange-500 pl-6">
+        <p className="text-slate-400 text-lg max-w-md leading-relaxed mb-8">
           Bridging the gap between solid mechanics, thermodynamics, and embedded systems at NUST.
         </p>
 
         <div className="flex gap-6">
-          <button className="px-8 py-3 bg-orange-500 text-white font-semibold rounded hover:bg-orange-600 transition-all shadow-lg">
+          <button className="px-8 py-3 bg-teal-500 text-white font-semibold rounded hover:bg-teal-600 transition-all shadow-lg">
             View Projects
           </button>
           <button className="px-8 py-3 border border-slate-600 text-slate-300 rounded hover:bg-slate-800 transition-all">
@@ -50,7 +50,7 @@ const Hero = () => {
             ASME ROVER V2
           </span>
           {/* Simple Green LED Dot */}
-          <span className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse shadow-[0_0_8px_#22c55e]"></span>
+          <span className="w-1.5 h-1.5 bg-teal-400 rounded-full animate-pulse shadow-[0_0_8px_#2dd4bf]"></span>
         </div>
       </motion.div>
     </div>

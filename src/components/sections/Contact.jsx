@@ -23,7 +23,7 @@ const Contact = () => {
           <p className="mb-6">I'll get back to you shortly.</p>
           <button 
             onClick={() => setStatus(null)}
-            className="text-orange-500 font-medium hover:text-orange-400 text-sm transition-colors"
+            className="text-teal-400 font-medium hover:text-teal-300 text-sm transition-colors"
           >
             Send another message
           </button>
@@ -57,7 +57,7 @@ const Contact = () => {
               <input 
                 required
                 type="text" 
-                className="w-full bg-slate-900 rounded border border-slate-800 px-4 py-3 text-slate-200 focus:outline-none focus:border-orange-500 transition-colors"
+                className="w-full bg-slate-900 rounded border border-slate-800 px-4 py-3 text-slate-200 focus:outline-none focus:border-teal-500 transition-colors"
               />
             </div>
             <div className="flex flex-col gap-2">
@@ -65,7 +65,7 @@ const Contact = () => {
               <input 
                 required
                 type="email" 
-                className="w-full bg-slate-900 rounded border border-slate-800 px-4 py-3 text-slate-200 focus:outline-none focus:border-orange-500 transition-colors"
+                className="w-full bg-slate-900 rounded border border-slate-800 px-4 py-3 text-slate-200 focus:outline-none focus:border-teal-500 transition-colors"
               />
             </div>
           </div>
@@ -75,13 +75,13 @@ const Contact = () => {
             <textarea 
               required
               rows="4" 
-              className="w-full bg-slate-900 rounded border border-slate-800 px-4 py-3 text-slate-200 focus:outline-none focus:border-orange-500 transition-colors resize-none"
+              className="w-full bg-slate-900 rounded border border-slate-800 px-4 py-3 text-slate-200 focus:outline-none focus:border-teal-500 transition-colors resize-none"
             ></textarea>
           </div>
 
           <button 
             disabled={status === 'submitting'}
-            className="bg-white text-slate-950 px-8 py-3 rounded font-bold hover:bg-orange-500 hover:text-white transition-all disabled:opacity-50"
+            className="bg-white text-slate-950 px-8 py-3 rounded font-bold hover:bg-teal-500 hover:text-white transition-all disabled:opacity-50"
           >
             {status === 'submitting' ? 'Sending...' : 'Send Message'}
           </button>

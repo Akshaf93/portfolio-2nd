@@ -33,7 +33,7 @@ const SkillBar = ({ skill, index }) => {
     <div className="mb-4">
       <div className="flex justify-between text-xs font-mono mb-1">
         <span className="text-slate-300">{skill.name}</span>
-        <span className="text-[#00d8ff]">{skill.level}% CAPACITY</span>
+        <span className="text-teal-400">{skill.level}%</span>
       </div>
       {/* The Bar Background */}
       <div className="h-2 bg-slate-800 w-full rounded-sm overflow-hidden border border-slate-700 relative">
@@ -42,7 +42,7 @@ const SkillBar = ({ skill, index }) => {
           initial={{ width: 0 }}
           whileInView={{ width: `${skill.level}%` }}
           transition={{ duration: 1, delay: index * 0.1, ease: "easeOut" }}
-          className="h-full bg-[#00d8ff] relative"
+          className="h-full bg-teal-500 relative"
         >
         </motion.div>
       </div>
@@ -58,12 +58,6 @@ const Skills = () => {
         <div className="flex flex-col md:flex-row justify-between items-end mb-16">
           <div>
             <h2 className="text-4xl font-black text-white mb-2">SYSTEM TELEMETRY</h2>
-            <p className="text-slate-400 font-mono text-sm">/// TECHNICAL_PROFICIENCY_LOG</p>
-          </div>
-          {/* Decorative Binary Decoration */}
-          <div className="hidden md:block font-mono text-[10px] text-slate-800 text-right leading-tight">
-            01001101 01000101 01000011 01001000<br/>
-            SYSTEM OPTIMIZED // READY
           </div>
         </div>
 
@@ -76,7 +70,7 @@ const Skills = () => {
               transition={{ delay: idx * 0.2 }}
               className="bg-slate-950/50 p-6 border border-slate-800 rounded-xl"
             >
-              <h3 className="text-[#00d8ff] font-mono text-sm font-bold mb-6 border-b border-slate-800 pb-2 tracking-widest">
+              <h3 className="text-teal-400 font-mono text-sm font-bold mb-6 border-b border-slate-800 pb-2 tracking-widest">
                 {stack.category}
               </h3>
               <div>

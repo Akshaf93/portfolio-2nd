@@ -3,8 +3,6 @@ import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import { motion, useInView } from 'framer-motion';
 import EngineeringMesh from '../canvas/EngineeringMesh';
-import { motion } from 'framer-motion';
-
 const Hero = () => {
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { amount: 0.1 });

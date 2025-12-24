@@ -1,8 +1,10 @@
-import React, { useRef } from 'react';
+import React, { useRef, Suspense, lazy } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import { motion, useInView } from 'framer-motion';
-import EngineeringMesh from '../canvas/EngineeringMesh';
+
+const EngineeringMesh = lazy(() => import('../canvas/EngineeringMesh'));
+
 const Hero = () => {
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { amount: 0.1 });
@@ -43,14 +45,12 @@ const Hero = () => {
           </button>
         </div>
 
-        <div className="flex flex-col justify-center">
-          <div className="flex items-center gap-2">
-            <span className="text-sm font-bold text-white font-mono tracking-wider">
-              ASME ROVER V2
-            </span>
-            {/* Simple Green LED Dot */}
-            <span className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse shadow-[0_0_8px_#22c55e]"></span>
-          </div>
+        <div className="flex items-center gap-2 mt-8">
+          <span className="text-sm font-bold text-white font-mono tracking-wider">
+            ASME ROVER V2
+          </span>
+          {/* Simple Green LED Dot */}
+          <span className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse shadow-[0_0_8px_#22c55e]"></span>
         </div>
       </motion.div>
     </div>
@@ -63,12 +63,14 @@ const Hero = () => {
           frameloop={isInView ? "always" : "never"}
         >
           <ambientLight intensity={0.5} />
-          <directionalLight position={[10, 10, 5]} intensity={1} color="#00d8ff" />
-          <directionalLight position={[-5, -5, -5]} intensity={0.5} color="#ff0000" />
+          <directionalLight position={[10, 10, 5]} intensity={1.2} color="#ffffff" />
+          <directionalLight position={[-5, -5, -5]} intensity={0.5} color="#cbd5e1" />
           
-          <EngineeringMesh position={[0, 0, 0]} />
+          <Suspense fallback={null}>
+            <EngineeringMesh position={[0, 0, 0]} />
+          </Suspense>
           
-          <OrbitControls enableZoom={false} autoRotate={isInView} autoRotateSpeed={0.5} />
+          <OrbitControls enableZoom={false} autoRotate={isInView} autoRotateSpeed={0.2} />
         </Canvas>
       </div>
 

@@ -44,8 +44,6 @@ const SkillBar = ({ skill, index }) => {
           transition={{ duration: 1, delay: index * 0.1, ease: "easeOut" }}
           className="h-full bg-[#00d8ff] relative"
         >
-            {/* Add a glow effect to the end of the bar */}
-            <div className="absolute right-0 top-0 bottom-0 w-2 bg-white blur-[4px]" />
         </motion.div>
       </div>
     </div>
@@ -63,7 +61,7 @@ const Skills = () => {
             <p className="text-slate-400 font-mono text-sm">/// TECHNICAL_PROFICIENCY_LOG</p>
           </div>
           {/* Decorative Binary Decoration */}
-          <div className="hidden md:block font-mono text-[10px] text-slate-600 text-right leading-tight">
+          <div className="hidden md:block font-mono text-[10px] text-slate-800 text-right leading-tight">
             01001101 01000101 01000011 01001000<br/>
             SYSTEM OPTIMIZED // READY
           </div>

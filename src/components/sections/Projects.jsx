@@ -97,7 +97,7 @@ const SpotlightCard = ({ project, onClick }) => {
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }} // Optim: Only animate when actually in view
-      className="relative overflow-hidden rounded-xl border border-slate-800 bg-slate-900/50 px-8 py-10 shadow-2xl cursor-pointer transition-transform hover:scale-[1.01]" // Reduced scale for performance
+      className="relative overflow-hidden rounded-xl border border-slate-800/50 bg-slate-900/50 px-8 py-10 shadow-2xl cursor-pointer transition-transform hover:scale-[1.01]" // Reduced scale for performance
     >
       {/* Optimized Spotlight: Uses inline styles driven by state but throttled by React's batching */}
       <div

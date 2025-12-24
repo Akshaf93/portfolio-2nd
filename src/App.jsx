@@ -7,31 +7,13 @@ import Contact from './components/sections/Contact';
 
 function App() {
   return (
-    <div className="relative min-h-screen text-white selection:bg-[#00d8ff] selection:text-slate-900 font-sans">
+    <div className="relative min-h-screen text-slate-200 selection:bg-orange-500 selection:text-white font-sans">
       
-      {/* --- BACKGROUND LAYERS --- */}
+      {/* Clean Background */}
       <div className="bg-grid"></div>
-      <div className="bg-vignette"></div>
-      <div className="bg-noise"></div>
 
-      {/* --- HUD FRAME (The "Click" Factor) --- */}
-      {/* This adds a fixed border and technical markings around the screen */}
-      <div className="fixed inset-4 border border-slate-800 pointer-events-none z-40 rounded-sm hidden md:block">
-        {/* Top Left Corner */}
-        <div className="absolute -top-1 -left-1 w-4 h-4 border-t-2 border-l-2 border-[#00d8ff]"></div>
-        {/* Bottom Right Corner */}
-        <div className="absolute -bottom-1 -right-1 w-4 h-4 border-b-2 border-r-2 border-[#00d8ff]"></div>
-        
-        {/* Decorative Lines */}
-        <div className="absolute top-1/2 -left-1 w-2 h-8 bg-slate-900 border-y border-slate-600"></div>
-        <div className="absolute top-1/2 -right-1 w-2 h-8 bg-slate-900 border-y border-slate-600"></div>
-        
-        {/* Status Text */}
-        <div className="absolute bottom-4 right-6 font-mono text-[10px] text-[#00d8ff] opacity-50 tracking-widest">
-          SYS.VER.2.0 // ONLINE
-        </div>
-      </div>
-
+      {/* REMOVED: bg-noise, bg-vignette, and the HUD Frame div */}
+      
       <Navbar />
       
       <main className="relative z-10">
@@ -41,6 +23,10 @@ function App() {
         <Contact />
       </main>
 
+      {/* Optional: Simple Footer Bar for "CAD Status" look */}
+      <div className="fixed bottom-0 w-full h-6 bg-slate-950 border-t border-slate-800 z-50 flex items-center px-4 text-[10px] text-slate-500 font-mono">
+         READY // VIEWPORT_01 // SCALE 1:1
+      </div>
     </div>
   );
 }

@@ -13,17 +13,17 @@ const Contact = () => {
 
   if (status === 'success') {
     return (
-      <section className="py-24 bg-slate-950 flex flex-col items-center justify-center text-center">
+      <section className="py-24 bg-white flex flex-col items-center justify-center text-center">
         <motion.div 
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
-          className="text-slate-300"
+          className="text-gray-600"
         >
-          <h3 className="text-2xl font-bold text-white mb-2">Message Received</h3>
+          <h3 className="text-2xl font-bold text-gray-900 mb-2">Message Received</h3>
           <p className="mb-6">I'll get back to you shortly.</p>
           <button 
             onClick={() => setStatus(null)}
-            className="text-teal-400 font-medium hover:text-teal-300 text-sm transition-colors"
+            className="text-indigo-600 font-medium hover:text-indigo-500 text-sm transition-colors underline"
           >
             Send another message
           </button>
@@ -33,12 +33,12 @@ const Contact = () => {
   }
 
   return (
-    <section className="py-32 bg-slate-950" id="contact">
+    <section className="py-32 bg-white" id="contact">
       <div className="max-w-xl mx-auto px-6">
         
         <div className="mb-12">
-          <h2 className="text-3xl font-bold text-white mb-4">Contact</h2>
-          <p className="text-slate-400 leading-relaxed">
+          <h2 className="text-3xl font-bold text-gray-900 mb-4">Contact</h2>
+          <p className="text-gray-500 leading-relaxed">
             Interested in collaboration? Please enter your details below.
           </p>
         </div>
@@ -53,35 +53,35 @@ const Contact = () => {
           {/* Simple Grid for Name/Email */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="flex flex-col gap-2">
-              <label className="text-sm font-medium text-slate-500">Name</label>
+              <label className="text-sm font-medium text-gray-700">Name</label>
               <input 
                 required
                 type="text" 
-                className="w-full bg-slate-900 rounded border border-slate-800 px-4 py-3 text-slate-200 focus:outline-none focus:border-teal-500 transition-colors"
+                className="w-full bg-gray-50 rounded border border-gray-200 px-4 py-3 text-gray-900 focus:outline-none focus:border-indigo-500 focus:bg-white transition-all"
               />
             </div>
             <div className="flex flex-col gap-2">
-              <label className="text-sm font-medium text-slate-500">Email</label>
+              <label className="text-sm font-medium text-gray-700">Email</label>
               <input 
                 required
                 type="email" 
-                className="w-full bg-slate-900 rounded border border-slate-800 px-4 py-3 text-slate-200 focus:outline-none focus:border-teal-500 transition-colors"
+                className="w-full bg-gray-50 rounded border border-gray-200 px-4 py-3 text-gray-900 focus:outline-none focus:border-indigo-500 focus:bg-white transition-all"
               />
             </div>
           </div>
 
           <div className="flex flex-col gap-2">
-            <label className="text-sm font-medium text-slate-500">Message</label>
+            <label className="text-sm font-medium text-gray-700">Message</label>
             <textarea 
               required
               rows="4" 
-              className="w-full bg-slate-900 rounded border border-slate-800 px-4 py-3 text-slate-200 focus:outline-none focus:border-teal-500 transition-colors resize-none"
+              className="w-full bg-gray-50 rounded border border-gray-200 px-4 py-3 text-gray-900 focus:outline-none focus:border-indigo-500 focus:bg-white transition-all resize-none"
             ></textarea>
           </div>
 
           <button 
             disabled={status === 'submitting'}
-            className="bg-white text-slate-950 px-8 py-3 rounded font-bold hover:bg-teal-500 hover:text-white transition-all disabled:opacity-50"
+            className="bg-gray-900 text-white px-8 py-3 rounded font-bold hover:bg-indigo-600 transition-all disabled:opacity-50 shadow-lg"
           >
             {status === 'submitting' ? 'Sending...' : 'Send Message'}
           </button>

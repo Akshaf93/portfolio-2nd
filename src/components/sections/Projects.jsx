@@ -97,38 +97,30 @@ const SpotlightCard = ({ project, onClick }) => {
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }} // Optim: Only animate when actually in view
-      className="relative overflow-hidden rounded-xl border border-slate-800/50 bg-slate-900/50 px-8 py-10 shadow-2xl cursor-pointer transition-transform hover:scale-[1.01]" // Reduced scale for performance
+      className="relative overflow-hidden rounded-xl border border-gray-200 bg-white px-8 py-10 shadow-sm hover:shadow-xl cursor-pointer transition-all hover:-translate-y-1" 
     >
-      {/* Optimized Spotlight: Uses inline styles driven by state but throttled by React's batching */}
-      <div
-        className="pointer-events-none absolute -inset-px transition-opacity duration-300"
-        style={{
-          opacity,
-          background: `radial-gradient(800px circle at ${position.x}px ${position.y}px, rgba(45, 212, 191, 0.05), transparent 40%)`, // Reduced opacity for cleaner look
-        }}
-      />
       
       <div className="relative z-10 flex flex-col h-full">
         <div className="flex justify-between items-start mb-4">
-             <span className="font-mono text-xs text-slate-500 border border-slate-700 px-2 py-1 rounded">
+             <span className="font-mono text-xs text-gray-500 border border-gray-200 px-2 py-1 rounded bg-gray-50">
                 ID: {project.id}
              </span>
-             <span className="font-mono text-xs text-teal-400 bg-teal-500/10 px-2 py-1 rounded">
+             <span className="font-mono text-xs text-indigo-600 bg-indigo-50 px-2 py-1 rounded font-bold">
                 STATUS: {project.status}
              </span>
         </div>
 
-        <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-teal-400 transition-colors">
+        <h3 className="text-2xl font-bold text-gray-900 mb-2 group-hover:text-indigo-600 transition-colors">
           {project.title}
         </h3>
         
-        <p className="text-slate-400 text-sm leading-relaxed mb-6 flex-grow">
+        <p className="text-gray-600 text-sm leading-relaxed mb-6 flex-grow">
           {project.desc}
         </p>
 
         <div className="flex flex-wrap gap-2 mt-auto">
           {project.tech.map((tech) => (
-            <span key={tech} className="text-xs font-mono text-slate-300 bg-slate-800 px-2 py-1 rounded border border-slate-700">
+            <span key={tech} className="text-xs font-mono text-gray-600 bg-gray-100 px-2 py-1 rounded">
               {tech}
             </span>
           ))}
@@ -142,14 +134,14 @@ const Projects = () => {
   const [selectedProject, setSelectedProject] = useState(null);
 
   return (
-    <section className="py-32 relative z-10 bg-slate-950">
+    <section className="py-32 relative z-10 bg-white">
       <div className="max-w-7xl mx-auto px-6">
         <div className="mb-16">
-            <h2 className="text-4xl font-black text-white mb-4">
-                <span className="text-teal-400 font-mono text-lg block mb-2">PROJECTS</span>
+            <h2 className="text-4xl font-black text-gray-900 mb-4">
+                <span className="text-indigo-600 font-mono text-lg block mb-2">CASE STUDIES</span>
                 The Workshop
             </h2>
-            <p className="text-slate-400 max-w-2xl">
+            <p className="text-gray-500 max-w-2xl text-lg">
                 Detailed breakdown of mechanical systems. Click to inspect.
             </p>
         </div>

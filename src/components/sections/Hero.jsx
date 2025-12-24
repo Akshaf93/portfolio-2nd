@@ -12,10 +12,10 @@ const Hero = () => {
   return (
     <section 
       ref={sectionRef} 
-      className="relative w-full h-screen flex items-center overflow-hidden bg-slate-950"
+      className="relative w-full h-screen flex items-center overflow-hidden bg-[#f3f4f6]"
     >
       {/* Engineering Grid Background */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#1e293b_1px,transparent_1px),linear-gradient(to_bottom,#1e293b_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] opacity-20 pointer-events-none" />
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#e5e7eb_1px,transparent_1px),linear-gradient(to_bottom,#e5e7eb_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] opacity-100 pointer-events-none" />
       
       {/* LEFT SIDE: Text & Controls */}
     <div className="w-full md:w-1/2 pl-8 md:pl-24 z-20 flex flex-col justify-center h-full">
@@ -64,9 +64,9 @@ const Hero = () => {
           gl={{ antialias: true, powerPreference: "high-performance" }}
           frameloop={isInView ? "always" : "never"}
         >
-          <ambientLight intensity={0.5} />
-          <directionalLight position={[10, 10, 5]} intensity={1.2} color="#ffffff" />
-          <directionalLight position={[-5, -5, -5]} intensity={0.5} color="#cbd5e1" />
+          <ambientLight intensity={0.8} />
+          <directionalLight position={[10, 10, 5]} intensity={1.5} color="#ffffff" />
+          <directionalLight position={[-5, -5, -5]} intensity={1} color="#e2e8f0" />
           
           <Suspense fallback={null}>
             <EngineeringMesh position={[0, 0, 0]} />
@@ -76,7 +76,7 @@ const Hero = () => {
         </Canvas>
       </div>
 
-      <div className="absolute bottom-0 w-full h-32 bg-gradient-to-t from-slate-950 to-transparent z-20 pointer-events-none" />
+      <div className="absolute bottom-0 w-full h-32 bg-gradient-to-t from-[#f3f4f6] to-transparent z-20 pointer-events-none" />
     </section>
   );
 };

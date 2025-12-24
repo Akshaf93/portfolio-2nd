@@ -32,17 +32,17 @@ const SkillBar = ({ skill, index }) => {
   return (
     <div className="mb-4">
       <div className="flex justify-between text-xs font-mono mb-1">
-        <span className="text-slate-300">{skill.name}</span>
-        <span className="text-teal-400">{skill.level}%</span>
+        <span className="text-gray-700 font-semibold">{skill.name}</span>
+        <span className="text-gray-500">{skill.level}%</span>
       </div>
       {/* The Bar Background */}
-      <div className="h-2 bg-slate-800 w-full rounded-sm overflow-hidden border border-slate-700 relative">
+      <div className="h-2 bg-gray-200 w-full rounded-full overflow-hidden relative">
         {/* The Fill Animation */}
         <motion.div 
           initial={{ width: 0 }}
           whileInView={{ width: `${skill.level}%` }}
           transition={{ duration: 1, delay: index * 0.1, ease: "easeOut" }}
-          className="h-full bg-teal-500 relative"
+          className="h-full bg-indigo-600 relative"
         >
         </motion.div>
       </div>
@@ -52,12 +52,12 @@ const SkillBar = ({ skill, index }) => {
 
 const Skills = () => {
   return (
-    <section className="py-32 relative border-t border-slate-800/50 bg-slate-950">
+    <section className="py-32 relative border-t border-gray-200 bg-[#f9fafb]">
       <div className="max-w-6xl mx-auto px-6">
         
         <div className="flex flex-col md:flex-row justify-between items-end mb-16">
           <div>
-            <h2 className="text-4xl font-black text-white mb-2">SYSTEM TELEMETRY</h2>
+            <h2 className="text-4xl font-black text-gray-900 mb-2">TECHNICAL COMPETENCIES</h2>
           </div>
         </div>
 
@@ -68,9 +68,9 @@ const Skills = () => {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: idx * 0.2 }}
-              className="bg-slate-900/50 p-6 border border-slate-800 rounded-xl"
+              className="bg-white p-8 border border-gray-200 rounded-xl shadow-sm"
             >
-              <h3 className="text-teal-400 font-mono text-sm font-bold mb-6 border-b border-slate-800 pb-2 tracking-widest">
+              <h3 className="text-indigo-600 font-mono text-sm font-bold mb-6 border-b border-gray-100 pb-2 tracking-widest">
                 {stack.category}
               </h3>
               <div>

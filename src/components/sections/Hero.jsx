@@ -12,8 +12,10 @@ const Hero = () => {
   return (
     <section 
       ref={sectionRef} 
-      className="relative w-full h-screen flex items-center overflow-hidden"
+      className="relative w-full h-screen flex items-center overflow-hidden bg-slate-950"
     >
+      {/* Engineering Grid Background */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#1e293b_1px,transparent_1px),linear-gradient(to_bottom,#1e293b_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] opacity-20 pointer-events-none" />
       
       {/* LEFT SIDE: Text & Controls */}
     <div className="w-full md:w-1/2 pl-8 md:pl-24 z-20 flex flex-col justify-center h-full">
@@ -74,7 +76,7 @@ const Hero = () => {
         </Canvas>
       </div>
 
-      <div className="absolute bottom-0 w-full h-32 bg-gradient-to-t from-[#050a14] to-transparent z-20 pointer-events-none" />
+      <div className="absolute bottom-0 w-full h-32 bg-gradient-to-t from-slate-950 to-transparent z-20 pointer-events-none" />
     </section>
   );
 };

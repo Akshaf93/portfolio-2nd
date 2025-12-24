@@ -52,7 +52,7 @@ const SkillBar = ({ skill, index }) => {
 
 const Skills = () => {
   return (
-    <section className="py-32 relative border-t border-slate-800/50 bg-slate-900/20">
+    <section className="py-32 relative border-t border-slate-800/50 bg-slate-950">
       <div className="max-w-6xl mx-auto px-6">
         
         <div className="flex flex-col md:flex-row justify-between items-end mb-16">
@@ -68,7 +68,7 @@ const Skills = () => {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: idx * 0.2 }}
-              className="bg-slate-950/50 p-6 border border-slate-800 rounded-xl"
+              className="bg-slate-900/50 p-6 border border-slate-800 rounded-xl"
             >
               <h3 className="text-teal-400 font-mono text-sm font-bold mb-6 border-b border-slate-800 pb-2 tracking-widest">
                 {stack.category}

@@ -142,7 +142,7 @@ const Projects = () => {
   const [selectedProject, setSelectedProject] = useState(null);
 
   return (
-    <section className="py-32 relative z-10">
+    <section className="py-32 relative z-10 bg-slate-950">
       <div className="max-w-7xl mx-auto px-6">
         <div className="mb-16">
             <h2 className="text-4xl font-black text-white mb-4">
